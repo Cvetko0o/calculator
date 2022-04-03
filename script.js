@@ -1,3 +1,4 @@
+
 let input = document.getElementById('input');
 let numbers = document.querySelectorAll('.numbers button');
 let operators = document.querySelectorAll('.operators button');
@@ -14,14 +15,19 @@ numbers.forEach( number => {
         } else {
             input.textContent += number.textContent;
         }
-        container += input.textContent;
+        container = input.textContent;
     });
 });
 
 operators.forEach(operator => {
     operator.addEventListener('click', function(){
+        let currentInput = input.textContent;
+        let lastChar = currentInput[currentInput.length - 1];
+        if(lastChar === '*' || lastChar === '/' || lastChar === '+' || lastChar === '-'){
+           return;
+        }
         input.textContent += operator.textContent;
-        container += input.textContent;
+        container = input.textContent;
     });
 });
 
@@ -30,5 +36,6 @@ clear.addEventListener('click', function(){
  });
 
 result.addEventListener('click', function(){
+    input.textContent = eval(input.textContent);
 
 }); 
